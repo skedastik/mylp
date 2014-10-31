@@ -29,11 +29,13 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     %     1   
     %         Dictionary is unbounded.
     %    
-    %   `status` is one of the following:
+    %   `status` is any combination of the following bit masks:
     %     0
     %         Status is undefined.
     %     1
     %         Input dictionary is final.
+    %     2
+    %         Pivot stalled.
     %
     %   `enter_var` is the index of the entering variable, or -1 if undefined.
     %
@@ -53,7 +55,7 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     
     if (length(enter_vars) == 0)
         % If there are no non-basic variables w/ coefficients higher than 0, then the input dictionary is the final dictionary.
-        status = 1;
+        status = bitor(status, 1);
         return;
     end
     
@@ -99,8 +101,14 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     end
     
     % Unpack D into b, A, z0, and c
-    b  = D(1:m, 1);
-    A  = D(1:m, 2:end);
-    z0 = D(m+1, 1);
-    c  = D(m+1, 2:end)';        % Tranpose for column vector
+    b     = D(1:m, 1);
+    A     = D(1:m, 2:end);
+    z_old = z0;
+    z0    = D(m+1, 1);
+    c     = D(m+1, 2:end)';        % Tranpose for column vector
+    
+    % If the objective value hasn't changed, set stall status. Note that while equality-checking floating point numbers is generally a bad idea, it is safe to do here because 0 is added to z0 during stalling.
+    if (z0 == z_old)
+        status = bitor(status, 2);
+    end
 end

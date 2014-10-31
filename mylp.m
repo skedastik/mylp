@@ -1,11 +1,12 @@
-function [z, A, b, c, b_vars, nb_vars, errnum, status, pivots] = mylp(z0, A, b, c, b_vars, nb_vars, analysis_func)
+function [z, A, b, c, b_vars, nb_vars, errnum, status, info] = mylp(z0, A, b, c, b_vars, nb_vars, analysis_func)
     %MYLP is an implementation of the simplex algorithm.
     %
     %   [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] = MYLP (z0, A, b, c, b_vars, nb_vars)
     %
     %   ARGUMENTS
     %
-    %   [z0, A, b, c, b_vars, nb_vars] describe the input dictionary. The dictionary must be in standard form.
+    %   [z0, A, b, c, b_vars, nb_vars] describe the input dictionary. The 
+    %     dictionary must be in standard form.
     %
     %   `analysis_func` is a function that performs entering and leaving 
     %     variable analysis. It is only invoked if candidate entering and 
@@ -35,24 +36,31 @@ function [z, A, b, c, b_vars, nb_vars, errnum, status, pivots] = mylp(z0, A, b, 
     %     1
     %         Final dictionary encountered.
     %
-    %   `pivots` is the number of pivots before mylp returned.
+    %   `info` is a struct with the following fields:
+    %         iterations: The number of pivots before mylp returned.
+    %         stalls: The number of stalled pivots before mylp returned.
     %  
     
     errnum = 0;
     status = 0;
-    pivots = 0;
+    info.iterations = 0;
+    info.stalls = 0;
     z = z0;
     
     while (true)
         [z, A, b, c, b_vars, nb_vars, errnum, status, ~,~] = ...
             mylp_pivot(z, A, b, c, b_vars, nb_vars, analysis_func);
         
-        if (status != 1)
-            pivots++;
+        if (!bitand(status, 1))
+            info.iterations++;
+        end
+        
+        if (bitand(status, 2))
+            info.stalls++;
         end
         
         % Return if dictionary is unbounded, or final dictionary encountered.
-        if (errnum == 1 || status == 1)
+        if (errnum == 1 ||  bitand(status, 1))
             return;
         end
     end
