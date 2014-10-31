@@ -34,7 +34,7 @@ function [ms, ns] = mylp_profile(analysis_func, rule_name)
     printf("%-32s%-16d%-16.2f\n", rule_name, total_iterations, stall_percentage);
 end
 
-printf("Profiling simplex over %d tests...\n\n", num_tests);
+printf("Profiling simplex over %d dictionaries...\n\n", num_tests);
 printf("%-32s%-16s%-16s\n", "Heuristic", "# Pivots", "% Stall");
 printf("-------------------------------------------------------\n");
 
