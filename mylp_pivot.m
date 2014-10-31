@@ -69,7 +69,12 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     end
     
     % Perform entering and leaving variable analysis, passing a subset of A and c to the analysis function.
-    [enter_var, leaving_var] = analysis_func(Ap, b, c(idx), b_vars, enter_vars);
+    [enter_var, leaving_var, z_delta] = analysis_func(Ap, b, c(idx), b_vars, enter_vars);
+    
+    % If the objective increase is effectively zero, report stalling.
+    if (z_delta < 1e-15)
+        status = bitor(status, 2);
+    end
     
     % ROW OPERATIONS
     
@@ -103,12 +108,6 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     % Unpack D into b, A, z0, and c
     b     = D(1:m, 1);
     A     = D(1:m, 2:end);
-    z_old = z0;
     z0    = D(m+1, 1);
     c     = D(m+1, 2:end)';        % Tranpose for column vector
-    
-    % If the objective value hasn't changed, set stall status. Note that while equality-checking floating point numbers is generally a bad idea, it is safe to do so here because 0 is added to z0 during stalling.
-    if (z0 == z_old)
-        status = bitor(status, 2);
-    end
 end

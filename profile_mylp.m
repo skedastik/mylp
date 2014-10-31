@@ -38,8 +38,9 @@ printf("Profiling simplex over %d tests...\n\n", num_tests);
 printf("%-32s%-16s%-16s\n", "Heuristic", "# Pivots", "% Stall");
 printf("-------------------------------------------------------\n");
 
-[ms, ns] = mylp_profile(@mylp_bland, "Bland's Rule");
+mylp_profile(@mylp_bland, "Bland's Rule");
 mylp_profile(@mylp_dantzig, "Largest Coefficient");
+[ms, ns] = mylp_profile(@mylp_greedy, "Greedy");
 
 printf("\n%-32sStd. Dev.\n", "Average dictionary size");
 printf("-------------------------------------------------------\n");

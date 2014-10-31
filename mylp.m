@@ -37,8 +37,10 @@ function [z, A, b, c, b_vars, nb_vars, errnum, status, info] = mylp(z0, A, b, c,
     %         Final dictionary encountered.
     %
     %   `info` is a struct with the following fields:
-    %         iterations: The number of pivots before mylp returned.
-    %         stalls: The number of stalled pivots before mylp returned.
+    %     iterations
+    %         The number of pivots before mylp returned.
+    %     stalls
+    %         The number of stalled pivots before mylp returned.
     %  
     
     errnum = 0;
