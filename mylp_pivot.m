@@ -107,7 +107,7 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     z0    = D(m+1, 1);
     c     = D(m+1, 2:end)';        % Tranpose for column vector
     
-    % If the objective value hasn't changed, set stall status. Note that while equality-checking floating point numbers is generally a bad idea, it is safe to do here because 0 is added to z0 during stalling.
+    % If the objective value hasn't changed, set stall status. Note that while equality-checking floating point numbers is generally a bad idea, it is safe to do so here because 0 is added to z0 during stalling.
     if (z0 == z_old)
         status = bitor(status, 2);
     end
