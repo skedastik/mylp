@@ -6,14 +6,14 @@ for i = 1:5
     
     [z0, A, b, c, b_vars, nb_vars] = mylp_load([test_dir fname]);
     
-    [z, ~,~,~,~,~, errnum, ~, pivots] = ...
+    [z, ~,~,~,~,~, errnum, ~, info] = ...
         mylp(z0, A, b, c, b_vars, nb_vars, @mylp_bland);
     
     fid = fopen([output_dir fname ".out"], "w");
     
     if (errnum == 0)
         fputs(fid, [mat2str(z) "\n"]);
-        fputs(fid, mat2str(pivots));
+        fputs(fid, mat2str(info.iterations));
     else
         fputs(fid, "UNBOUNDED");
     end
