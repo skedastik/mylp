@@ -47,7 +47,7 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     enter_var = -1;
     leaving_var = -1;
     
-    % ENTERING AND LEAVING VARIABLE ANALYSIS
+    %=== ENTERING AND LEAVING VARIABLE ANALYSIS ================================
 
     % Look for non-basic variables w/ coefficients higher than 0. These are candidate entering variables.
     idx = find(c > 0);
@@ -76,7 +76,7 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
         status = bitor(status, 2);
     end
     
-    % ROW OPERATIONS
+    %=== ROW OPERATIONS ========================================================
     
     [m,n] = size(A);
     

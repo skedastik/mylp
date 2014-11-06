@@ -49,9 +49,9 @@ function [z, A, b, c, b_vars, nb_vars, errnum, status, info] = mylp(z0, A, b, c,
     info.stalls = 0;
     z = z0;
     
-    % TODO: INITIALIZATION PHASE
+    %=== TODO: INITIALIZATION PHASE ============================================
     
-    % OPTIMIZATION PHASE
+    %=== OPTIMIZATION PHASE ====================================================
     
     while (true)
         [z, A, b, c, b_vars, nb_vars, errnum, status, ~,~] = ...
