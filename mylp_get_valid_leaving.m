@@ -1,7 +1,7 @@
 function [leaving_idx, z_delta] = mylp_get_valid_leaving(A, b, c, b_vars, enter_vars, enter_idx)
     %MYLP_GET_VALID_LEAVING returns all valid leaving variables for the given subset of a dictionary.
     %
-    %   [enter_var, leaving_var] = MYLP_GET_VALID_LEAVING(A, b, c, b_vars, enter_vars, enter_idx)
+    %   [leaving_idx, z_delta] = MYLP_GET_VALID_LEAVING(A, b, c, b_vars, enter_vars, enter_idx)
     %
     %   ARGUMENTS
     %
