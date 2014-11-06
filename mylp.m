@@ -1,5 +1,5 @@
 function [z, A, b, c, b_vars, nb_vars, errnum, status, info] = mylp(z0, A, b, c, b_vars, nb_vars, analysis_func)
-    %MYLP is an implementation of the simplex algorithm.
+    %MYLP is a simplex-based LP solver.
     %
     %   [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] = MYLP (z0, A, b, c, b_vars, nb_vars)
     %
