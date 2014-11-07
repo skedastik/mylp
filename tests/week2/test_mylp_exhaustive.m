@@ -4,6 +4,8 @@ clear all;
 close all;
 clc;
 
+addpath("../../");
+
 unittest_dir = "moreUnitTests/";
 
 for i = 0:109

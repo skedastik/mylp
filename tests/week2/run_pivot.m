@@ -1,3 +1,5 @@
+addpath("../../");
+
 test_dir = "part1TestCases/assignmentParts/";
 output_dir = "part1-output/";
 

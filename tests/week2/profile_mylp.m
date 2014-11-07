@@ -2,6 +2,8 @@ clear all;
 close all;
 clc;
 
+addpath("../../");
+
 global num_tests = 110;
 
 function [ms, ns] = mylp_profile(analysis_func, rule_name)
