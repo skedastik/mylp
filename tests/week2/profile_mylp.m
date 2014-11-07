@@ -2,6 +2,7 @@ clear all;
 close all;
 clc;
 
+addpath("../");
 addpath("../../");
 
 global num_tests = 110;

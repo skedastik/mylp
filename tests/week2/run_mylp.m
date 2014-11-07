@@ -1,3 +1,4 @@
+addpath("../");
 addpath("../../");
 
 test_dir = "part2TestCases/assignmentParts/";

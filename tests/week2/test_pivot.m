@@ -2,6 +2,7 @@ clear all;
 close all;
 clc;
 
+addpath("../");
 addpath("../../");
 
 unittest_dir = "part1TestCases/unitTests/";
