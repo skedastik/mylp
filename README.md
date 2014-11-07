@@ -1,1 +1,1 @@
-An _exploratory_ LP solver using simplex with a higher-order pivot function to facilitate plug-and-play heuristics.
+An _exploratory_ LP solver using simplex with a higher-order pivot function to facilitate plug-and-play heuristics. Very rudimentary.
