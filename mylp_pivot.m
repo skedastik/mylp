@@ -91,12 +91,16 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     b_vars(i) = enter_var;
     nb_vars(j) = leaving_var;
     
-    % Update row i by dividing it by -A_ij
-    D(i,:) /= -A(i,j);
+    % Also swap and negate their coefficients
+    coeff = -A(i,j);
+    j += 1;                             % Increment j so that it indexes D
+    D(i,j) = -1;
+    
+    % Update row i by dividing it by coefficient
+    D(i,:) /= coeff;
     
     % Perform row operations (substitutions) on remaining rows...
     enter_row = D(i,:);
-    j += 1;                     % Increment j so that it indexes D
     for ii = 1:m+1
         if (ii != i)
             coeff = D(ii,j);
