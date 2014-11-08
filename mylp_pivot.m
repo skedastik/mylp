@@ -1,3 +1,7 @@
+% TODO
+% 
+% Returning entire dictionaries is highly inefficient. Use partial reconstruction instead.
+
 function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] = mylp_pivot(z0, A, b, c, b_vars, nb_vars, analysis_func)
     %MYLP_PIVOT performs a single pivot on an LP dictionary.
     %
@@ -85,6 +89,7 @@ function [z0, A, b, c, b_vars, nb_vars, errnum, status, enter_var, leaving_var] 
     j = find(nb_vars == enter_var);
     
     % Merge b, A, z0, and c into a single matrix for convenience
+    % TODO: This could get expensive for large dictionaries.
     D = [b A; [z0 c']];
     
     % Swap entering and leaving variables: Make the entering var basic, the leaving var non-basic.
